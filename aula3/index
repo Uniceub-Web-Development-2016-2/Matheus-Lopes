@@ -1,0 +1,15 @@
+<?php
+
+include('request.php');
+
+$protocol = $_SERVER['SERVER_PROTOCOL'];
+$server_ip = $_SERVER['SERVER_ADDR'];
+$resource_path = $_SERVER['REQUEST_URI'];
+$params = $_SERVER['QUERY_STRING'];
+$method = $_SERVER['REQUEST_METHOD'];
+$ip_remote = $_SERVER['REMOTE_ADDR'];
+
+
+$request = new request($protocol, $server_ip, $resource_path, $params_arr, $method, $ip_remote);
+var_dump($request);
+
