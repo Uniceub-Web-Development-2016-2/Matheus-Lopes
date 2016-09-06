@@ -1,0 +1,380 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Simple Event API"
+    },
+    "host": "localhost:8080",
+    "basePath": "/v1",
+    "schemes": [
+        "http"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "paths": {
+        "/events/create": {
+            "post": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Create a new event",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Description of the event",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "banner",
+                        "in": "body",
+                        "description": "Event banner",
+                        "type": "object",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully created!",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "item": {
+                                        "$ref": "#/definitions/Event"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Update an existing event",
+                "description": "",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Event object that needs to be added",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Event"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Event not found"
+                    },
+                    "405": {
+                        "description": "Validation exception"
+                    }
+                }
+            }
+        },
+        "delete": {
+            "tags": [
+                "event"
+            ],
+            "summary": "Delete event",
+            "description": "This can only be done by the logged in user.",
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "event",
+                    "description": "The event that needs to be deleted",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "responses": {
+                "400": {
+                    "description": "Invalid event name provided"
+                },
+                "404": {
+                    "description": "Event not found"
+                }
+            }
+        },
+        "/users/create": {
+            "post": {
+                "tags": [
+                    "user"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "user-name",
+                    "in": "body",
+                    "description": "Username",
+                    "type": "string",
+                    "required": true
+                }
+            ],
+            "responses": {
+                "201": {
+                    "description": "Successfully created!",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "data": {
+                                "type": "array",
+                                "item": {
+                                    "$ref": "#/definitions/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/login": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Logs user into the system",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "username",
+                        "description": "The user name for login",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "password",
+                        "description": "The password for login in clear text",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/users/{user-name}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "Get basic information about a user by name",
+                "parameters": [
+                    {
+                        "name": "user-name",
+                        "in": "path",
+                        "description": "The user identification",
+                        "type": "string",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "200": {
+                            "description": "OK!"
+                        },
+                        "400": {
+                            "description": "Invalid username supplied"
+                        },
+                        "description": "User not found",
+                        "schema": {
+                            "type": "object"
+                        },
+                        "properties": {
+                            "data": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    }
+                },
+                "put": {
+                    "tags": [
+                        "user"
+                    ],
+                    "summary": "Updated user",
+                    "description": "This can only be done by the logged in user.",
+                    "parameters": [
+                        {
+                            "in": "path",
+                            "name": "username",
+                            "description": "name that need to be deleted",
+                            "required": true,
+                            "type": "string"
+                        },
+                        {
+                            "in": "body",
+                            "name": "body",
+                            "description": "Updated user object",
+                            "required": false,
+                            "schema": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "400": {
+                            "description": "Invalid user supplied"
+                        },
+                        "404": {
+                            "description": "User not found"
+                        }
+                    }
+                }
+            },
+            "/user/delete": {
+                "delete": {
+                    "tags": [
+                        "user"
+                    ],
+                    "summary": "Delete user",
+                    "description": "This can only be done by the logged in user.",
+                    "parameters": null,
+                    "$ref": "#/",
+                    "responses": {
+                        "400": {
+                            "description": "Invalid username supplied"
+                        },
+                        "404": {
+                            "description": "User not found"
+                        }
+                    }
+                },
+                "/{events-search}": {
+                    "get": {
+                        "tags": [
+                            "Events"
+                        ],
+                        "summary": "Search a event by name",
+                        "description": "",
+                        "parameters": [
+                            {
+                                "name": "events-anem",
+                                "in": "path",
+                                "description": "Event name",
+                                "type": "string",
+                                "required": true
+                            }
+                        ]
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "O.K!"
+                        },
+                        "schema": {
+                            "type": "object"
+                        },
+                        "properties": {
+                            "data": {
+                                "$ref": "#/definitions/Event"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "required": [
+                "name",
+                "e-mail",
+                "password"
+            ],
+            "properties": null,
+            "id": {
+                "type": "integer"
+            },
+            "user_name": {
+                "type": "string"
+            },
+            "full_name": {
+                "type": "string"
+            },
+            "e-mail": {
+                "type": "string"
+            },
+            "password": {
+                "type": "string"
+            }
+        },
+        "Image": {
+            "type": "object",
+            "properties": null,
+            "width": {
+                "type": "integer"
+            },
+            "height": {
+                "type": "integer"
+            },
+            "url": {
+                "type": "string"
+            }
+        },
+        "Event": {
+            "type": "object",
+            "required": [
+                "name",
+                "image",
+                "description"
+            ],
+            "properties": null,
+            "id": {
+                "type": "integer"
+            },
+            "name": {
+                "type": "string"
+            },
+            "description": {
+                "type": "string"
+            },
+            "image": {
+                "type": "#/definitions/Image"
+            },
+            "location": {
+                "type": "#/definitions/Location"
+            }
+        },
+        "Location": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "latitude": {
+                    "type": "number"
+                },
+                "longitude": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}
