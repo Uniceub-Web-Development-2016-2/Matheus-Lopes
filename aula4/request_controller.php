@@ -19,6 +19,8 @@ class RequestController
 		}
 		return "test"
 
+
+
 	//	$request_info['REMOTE_ADDR'];
 	//	$request_info['SERVER_ADDR'];
 	//	$request_info['SERVER_PROTOCOL'];
@@ -38,15 +40,37 @@ class RequestController
 		return true;
 	}
 
-	public function is_valid_protocol($protocol){
+	public function is_valid_protocol($protocol)
+	{
 		if( is_null($protocol) || !in_array($protocol, self::VALID_PROTOCOL))
 			return false;
 		
 		return true;	
 	}
 
+	public function is_valid_server($serv_addr)
+	{
+		if (filter_var($serv_addr, FILTER_VALIDATE_IP)) 
+		    return true;	
 
+		return false;
+	}
 
+	public function is_valid_remote($client_addr)
+	{
+		if(filter_var($client_addr, FILTER_VALIDATE_IP))
+			return true;
+
+		return false;
+	}
+
+	public function is_valid_uri($path)
+	{
+		if (isset($path))
+			return true;	
+		
+		return false;
+	}
 
 
 
