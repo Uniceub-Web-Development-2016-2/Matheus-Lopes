@@ -22,12 +22,18 @@ class ResourceController
 	private function EventsQuery($request){
 		$connector =(new DB_Events())->query($sql);
 		$sql = 'SELECT * FROM '.$request->getResource().' WHERE '.self::queryParams($request->getParameters());
-		return $connector->fetchObject(fetchAll());	
+		return $connector->fetchAll(PDO::FETCH_OBJ);	
+	}
+
+	private function ImagesQuery($request){
+	   $link = (new DB_Images())->query($query);
+	   $query = 'SELECT * FROM '.$request->getResource().' WHERE '.self::queryParams($request->getParameters());
+		return $link->fetchAll(PDO::FETCH_OBJ);		
 	}
 		
 	private function random($query){
 	  $result = (new DBConnector())->query($query);
-	    return $result->fetchObject(fetchAll());
+	    return $result->fetchAll(PDO::FETCH_OBJ);
 	}
 	
 	private function queryParams($params) {
