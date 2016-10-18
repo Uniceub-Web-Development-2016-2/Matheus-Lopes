@@ -1,7 +1,7 @@
 <?php
 
-include ('/opt/lampp/htdocs/eventos/control/resource_controller.php');
-include_once('/opt/lampp/htdocs/eventos/model/request.php');
+include ('resource_controller.php');
+include_once('../eventos/model/request.php');
 
 class RequestController
 {
