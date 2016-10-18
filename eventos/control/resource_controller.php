@@ -39,7 +39,13 @@ class ResourceController
 
         }
 
-	
+	private function remove($request) {
+		$statement = getUpdateCriteria($body);
+		$resource = $request->getResource();
+		$query = 'DELETE FROM '.$resource. $this->$statement;
+		return $query;
+	}
+
 	private function getUpdateCriteria($json)
 	{
 		$criteria = "";
