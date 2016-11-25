@@ -7,6 +7,7 @@ class Request{
         private $resource;
         private $params;
 	    private $body;
+        private $operation;
   
 	 public function __construct($method, $protocol, $serverAddress, $clientAddress, $path, $queryString, $body)
     {
@@ -15,6 +16,7 @@ class Request{
         $this->server_ip = $serverAddress;
         $this->remote_ip = $clientAddress;
         $this->setResource($path);
+        $this->setOperation($path);
         $this->setParams($queryString);
         $this->body = $body;
     }
@@ -24,10 +26,11 @@ class Request{
                 $Inc = 1;
                 foreach($this->params as $param) {
                         $request .= "P".$Inc."=".$param."&amp";
-                        $Inc++;
+                        $Inc++;             
         }
-        return $this->protocol.'://'.$this->server_ip.'/'.$this->resource.'?'.$request;
+            return $this->protocol.'://'.$this->server_ip.'/'.$this->resource.'?'.$request;
         }
+
         public function setMethod($method){
                 $this->method = $method;
         }
@@ -57,11 +60,22 @@ class Request{
 		  $r = explode("/", $s[0]);
 		  $this->resource = $r[2];		
 	    }
+
+        public function setOperation($path) {
+            $s = explode("?", $path);
+            $r = explode("/", $s[0]);
+            $this->operation = $r[3];
+        }
+    
+        public function getOperation() {
+            return $this->operation;
+        }
+
         public function getResource(){
                 return $this->resource;
         }
         
-	public function setParams($paramsString)
+	    public function setParams($paramsString)
     	{
         	parse_str($paramsString, $paramsArray);
        		 $this->params = $paramsArray;
@@ -70,4 +84,10 @@ class Request{
         public function getParameters(){
                 return $this->params;
         }
+
+        public function getBody(){
+            return $this->body;
+        }
+
+        
 }

@@ -1,5 +1,5 @@
 <?php
-include('../eventos/control/request_controller.php');
+include('../events/control/request_controller.php');
 
 $controller = new RequestController();
 

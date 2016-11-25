@@ -1,7 +1,7 @@
 <?php
 
 include ('resource_controller.php');
-include_once('../eventos/model/request.php');
+include_once('../events/model/request.php');
 
 class RequestController
 {

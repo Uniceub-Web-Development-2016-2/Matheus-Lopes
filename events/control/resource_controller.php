@@ -1,51 +1,66 @@
 <?php
 
-include_once ('../eventos/model/request.php');
-include_once ('../eventos/database/db_manager.php');
+include_once ('../events/model/request.php');
+include_once ('../events/database/db_manager.php');
 
 class ResourceController
-{	
+{
+		
  	private $METHODMAP = ['GET' => 'search' , 'POST' => 'create' , 'PUT' => 'update', 'DELETE' => 'remove' ];
 	
 	public function treat_request($request) {
-		$method = $request->getMethod();
-		return $this->{$this->METHODMAP[$method]}($request);
+		if($request->getMethod() == "POST" && $request->getOperation() == "login")
+		{
+			return $this->login($request);
+		}
+		return $this->{$this->METHODMAP[$request->getMethod()]}($request);
 	
 	}
 
+	public function login($request) {
+		$query = 'SELECT * FROM '.$request->getResource().' WHERE '.self::bodyParams($request->getBody());
+		$result = (new DBConnector())->query($query); 
+                return $result->fetchAll(PDO::FETCH_ASSOC);
+	}	
+
+	public function upload($request){
+		
+	}
+
 	private function search($request) {
-		$resource = $request->getResource();
-		$parameters = $request->getParameters();
-		$query = 'SELECT * FROM '.$resource.' WHERE '.self::queryParams($parameters);
-		$result = (new DBConnector())->query($query);
-		return $result->fetchAll(PDO::FETCH_OBJ); 
+		$query = 'SELECT * FROM '.$request->getResource().' WHERE '.self::queryParams($request->getParameters());
+		$result = (new DBConnector())->query($query); 
+		return $result->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
 	private function create($request) {
 		$body = $request->getBody();
 		$resource = $request->getResource();
 		$query = 'INSERT INTO '.$resource.' ('.$this->getColumns($body).') VALUES ('.$this->getValues($body).')';
-		return $query;
-		 
+		 return (new DBConnector())->query($query);
 	}
 	
 	private function update($request) {
-        $body = $request->getBody();
-        $resource = $request->getResource();
-        $query = 'UPDATE '.$resource.' SET '. $this->getUpdateCriteria($body);
-               /* var_dump($query);
-		        die();*/
+                $body = $request->getBody();
+                $resource = $request->getResource();
+                $query = 'UPDATE '.$resource.' SET '. $this->getUpdateCriteria($body);
 		return $query;
 
         }
-
-	private function remove($request) {
-		$statement = getUpdateCriteria($body);
-		$resource = $request->getResource();
-		$query = 'DELETE FROM '.$resource. $this->$statement;
-		return $query;
+	
+	private function bodyParams($json) {
+		$criteria = "";
+                $array = json_decode($json, true);
+                foreach($array as $key => $value) {
+                                $criteria .= $key." = '".$value."' AND ";
+                 
+                }
+                return substr($criteria, 0, -5);
+	
+		
 	}
 
+	
 	private function getUpdateCriteria($json)
 	{
 		$criteria = "";
@@ -60,8 +75,8 @@ class ResourceController
 	}	
 
 
-	
-	private function getColumns($json) 
+
+	private function getColumns($json)
 	{
 		$array = json_decode($json, true);
 		$keys = array_keys($array);
@@ -78,6 +93,7 @@ class ResourceController
         
         }
 
+
 		
 	private function queryParams($params) {
 		$query = "";		
@@ -91,3 +107,4 @@ class ResourceController
 	
 		
 }
+
