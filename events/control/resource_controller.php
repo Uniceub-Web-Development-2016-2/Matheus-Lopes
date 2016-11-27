@@ -7,7 +7,8 @@ class ResourceController
 {
 		
  	private $METHODMAP = ['GET' => 'search' , 'POST' => 'create' , 'PUT' => 'update', 'DELETE' => 'remove' ];
-	
+ 	private $FUNCTION = ['GET' => 'search_name' , 'POST' => 'make' , 'PUT' => 'renew', 'DELETE' => 'remove' ];
+ 	
 	public function treat_request($request) {
 		if($request->getMethod() == "POST" && $request->getOperation() == "login")
 		{
@@ -17,36 +18,42 @@ class ResourceController
 	
 	}
 
+	public function treat_function($request){
+		return $this->{$this->FUNCTION[$request->getMethod()]}($request);
+	}
+	
+
+
 	public function login($request) {
 		$query = 'SELECT * FROM '.$request->getResource().' WHERE '.self::bodyParams($request->getBody());
 		$result = (new DBConnector())->query($query); 
                 return $result->fetchAll(PDO::FETCH_ASSOC);
 	}	
 
-	public function upload($request){
-		
-	}
 
-	private function search($request) {
-		$query = 'SELECT * FROM '.$request->getResource().' WHERE '.self::queryParams($request->getParameters());
-		$result = (new DBConnector())->query($query); 
-		return $result->fetchAll(PDO::FETCH_ASSOC);
-	}
 	
 	private function create($request) {
 		$body = $request->getBody();
 		$resource = $request->getResource();
 		$query = 'INSERT INTO '.$resource.' ('.$this->getColumns($body).') VALUES ('.$this->getValues($body).')';
-		 return (new DBConnector())->query($query);
+		return (new DBConnector())->query($query);
 	}
 	
 	private function update($request) {
                 $body = $request->getBody();
                 $resource = $request->getResource();
                 $query = 'UPDATE '.$resource.' SET '. $this->getUpdateCriteria($body);
-		return $query;
+				$result=(new DBConnector())->query($query);
+				return $result->fetchAll(PDO::FETCH_ASSOC);
 
         }
+
+     private function search($request) {
+		$query = 'SELECT * FROM '.$request->getResource().' WHERE '.self::queryParams($request->getParameters());
+		$result = (new DBConnector())->query($query); 
+		return $result->fetchAll(PDO::FETCH_OBJ);
+	}
+	   
 	
 	private function bodyParams($json) {
 		$criteria = "";
@@ -71,7 +78,7 @@ class ResourceController
 				$criteria .= $key." = '".$value."',";
 			
 		}
-		return substr($criteria, 0, -1).$where." id = ".$array['id'];
+		return substr($criteria, 0, -1).$where." id = '".$array['id']."'";
 	}	
 
 
@@ -93,7 +100,14 @@ class ResourceController
         
         }
 
-
+	public function shape($json)
+	{
+		  	    $array = json_decode($json, true);
+                $keys = array_values($array);
+                $string =  implode("','$", $keys);
+		return "'$".$string."'";
+        
+	}
 		
 	private function queryParams($params) {
 		$query = "";		
