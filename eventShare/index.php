@@ -48,8 +48,9 @@
           </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <br>
       </form>
-
+         <button action="signup.php" type="button">Sign Up!</button> 
     </div> <!-- /container -->
 
 

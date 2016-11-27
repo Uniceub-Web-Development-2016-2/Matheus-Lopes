@@ -9,7 +9,10 @@ include('httpful.phar');
 
 	$response = \Httpful\Request::post($url)->sendsJson()->body($body)->send();   
 
-	echo  $response->body;
+	echo "<script type='text/javascript'>alert('Usuário cadastrado com sucesso!')</script>";
+
+	header("Location : perfil.php");
+
 
 
 ?>

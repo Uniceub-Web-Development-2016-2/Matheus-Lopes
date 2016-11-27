@@ -1,0 +1,35 @@
+#picture{
+float: left;
+max-width : 300px;
+max-height: 200px;
+width: auto;
+height: auto;
+border: 1px solid black;
+overflow: hidden;
+}
+
+.floatstop{
+clear : both;	
+}
+
+h2{
+	text-align: left;
+	margin-top: 10px;
+	margin-right: 100px;
+}
+
+#column1{
+float : left;
+width: 50%;	
+}
+
+#column2{
+float : left;
+width: 50%;	
+}
+
+
+#column3{
+float : left;
+width: 33%;	
+}

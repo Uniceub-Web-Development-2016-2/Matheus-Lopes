@@ -1,3 +1,11 @@
+<?php 
+session_start();
+if((!isset ($_SESSION['user']) == true) and (!isset ($_SESSION['password']) == true))
+{
+  unset($_SESSION['user']);
+  header('location : perfil.php');
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,52 +41,38 @@
 <!-- NAVBAR
 ================================================== -->
   <body>
-   <style>
-   .navbar-header{
-     position:relative;
-
-   }
-     
-   </style>
-    <div class="navbar-wrapper">
-      <div class="container">
-
-        <nav class="navbar navbar-inverse navbar-static-top">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">Project name</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="../eventShare/upload.html">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li class="dropdown-header">Nav header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="../eventShare/signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-               </ul>
-            </div>
-          </div>
-        </nav>
+   
+       <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../eventShare/perfil.php">Event Share</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="upload.html">Uploads</a></li>
+            <li><a href="eventos.html">Events</a></li>
+            <li><a href="requests.php">Update user</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-nav" action="search.php" method="get">
+            <input type="text" name="fullname" class="form-control" placeholder="Search...">
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+       
+       
 
       </div>
     </div>
@@ -91,9 +85,9 @@
   <style>
   .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
-      width: 70%;
+     
       height: 100%;
-      margin: auto;
+     
   }
   </style>
       <ol class="carousel-indicators">
@@ -101,14 +95,12 @@
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
       </ol>
-      <div class="carousel-inner" role="listbox">
+      <div id="slideshow" class="carousel-inner" role="listbox" action="exibe.php">
         <div class="item active" align="center" >
-          <img class="first-slide" src="../eventShare/img/flyer.jpg"  height="768" width="1024" alt="First slide">
+          <img class="first-slide" src="exibe.php?id=9" alt="Your generated image"  height="768" width="1024" alt="First slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Example headline.</h1>
-              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+            <p><a class="btn btn-lg btn-primary" href="eventos.html" role="button">Ver mais</a></p>
             </div>
           </div>
         </div>
@@ -116,9 +108,6 @@
           <img class="second-slide" src="../eventShare/img/trooper.jpg"  height="768" width="1024" alt="Second slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
             </div>
           </div>
         </div>
@@ -126,9 +115,7 @@
           <img class="third-slide" src="../eventShare/img/motorhead.jpg" height="768" width="1024" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+              
             </div>
           </div>
         </div>

@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+<?php
+include ('httpful.phar');
+
+$uri = 'http://localhost/events/user/search?fullname="'.$_GET["fullname"].'"';
+
+$response = \Httpful\Request::get($uri)->send();
+
+$array = json_decode($response->body, true);
+
+foreach ($array as $key => $value) {
+		echo '<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -20,7 +30,7 @@
     <!-- Custom styles for this template -->
     <link href="../eventShare/css/cover.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!-- Just for debugging purposes. Dont actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
 
@@ -48,7 +58,7 @@
               <ul class="nav navbar-nav navbar-left">
                 <li><a href="../eventShare/upload.html">Uploads</a></li>
                <li><a href="eventos.html">Events</a></li>
-                <li><a href="requests.php">Profile</a></li>
+                <li><a href="requests.php">Update User</a></li>
                 <li><a href="#">Help</a></li>
               </ul>
               <form class="navbar-form navbar-nav">
@@ -66,27 +76,20 @@
           <br>
           <br>
           <br>
-          <div class="container">
-          <div class="col-md-4">
-          </div>
-          
-            <div class="row">
-            <div class="col-md-4">
-
-              <form enctype="multipart/form-data"  action="upload.php" method="post">
-                <h2 class="form-signup-heading">Insert Image</h2>
-                <label for="inputName" class="sr-only">Name</label>
-                <input id="name" name="name" class="form-control" placeholder="Name" required="" autofocus="" type="text">
-                  <br>
-                <label for="inputInfo" class="sr-only">Gender</label>
-                <input id="info" name="information" class="form-control" placeholder="information" required="" autofocus="" type="text">
-                  <br>
-                <input type="hidden" name="Image" value="99999999"/>
-                <input name="image" type="file"/> 
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
-              </form> 
-              </div>
-              </div>
+         <table>
+          <link href="../../eventShare/css/table.css" rel="stylesheet">
+          <tr>
+          <th>fullname</th>
+          <th>email</th>
+          <th>gender</th>
+          <th>age</th>
+        </tr>
+        <tr>
+          <td>'.$value['fullname'].'</td>
+          <td>'.$value['email'].'</td>
+          <td>'.$value['gender'].'</td>
+          <td>'.$value['age'].'</td>
+        </tr>
 
             </div>
           
@@ -98,13 +101,9 @@
 
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    
   </body>
-</html>
+</html>';
+}
+
+//echo $response->body;
