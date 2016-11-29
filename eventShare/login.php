@@ -2,10 +2,15 @@
 
 include('httpful.phar');
 
-session_start();
+
+if(!isset($_SESSION))
+    {
+        session_start();
+    }
+
+
 if($_POST["email"] != null && $_POST["password"] != null)
 {
-	$_SESSION['user'] = $_POST['user'];
 
 	$login_array = array('email' => $_POST["email"], 'password' => $_POST["password"]);
 
@@ -21,6 +26,10 @@ if($_POST["email"] != null && $_POST["password"] != null)
 	$array = json_decode($response->body, true)[0];
 
 	if(!empty($array) && $array["email"] == $_POST["email"] && $array["password"] == $_POST["password"]){
+			$_SESSION['id'] = $array['id'];
+			$_SESSION['fullname'] = $array['fullname'];
+			$_SESSION['email'] = $array['email'];
+			$_SESSION['password'] = $array['password'];
 
 		header("Location: perfil.php");
 	}

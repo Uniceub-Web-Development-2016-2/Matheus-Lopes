@@ -48,11 +48,15 @@
           </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          <br>
+         <a href="signup.php" class="action" >
+        <button class="btn btn-lg btn-primary btn-block" aligh="center" >Signup</button>
+       </a>
         <br>
       </form>
-         <button action="signup.php" type="button">Sign Up!</button> 
     </div> <!-- /container -->
-
+    
+     
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>

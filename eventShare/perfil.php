@@ -1,8 +1,10 @@
 <?php 
 session_start();
-if((!isset ($_SESSION['user']) == true) and (!isset ($_SESSION['password']) == true))
+$welcome =  $_SESSION["fullname"];
+$email = $_SESSION["email"];
+if((!isset ($_SESSION['email']) == true) and (!isset ($_SESSION['password']) == true))
 {
-  unset($_SESSION['user']);
+  unset($_SESSION['email']);
   header('location : perfil.php');
   }
 ?>
@@ -55,24 +57,25 @@ if((!isset ($_SESSION['user']) == true) and (!isset ($_SESSION['password']) == t
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-left">
-            <li><a href="upload.html">Uploads</a></li>
-            <li><a href="eventos.html">Events</a></li>
-            <li><a href="requests.php">Update user</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="dispatch.php">Upload events</a></li>
+            <li><a href="eventos.php">Events by Category</a></li>
+            <li><a href="update.php">Update user</a></li>
+            <li><a href="updateEvent.php">Search events</a></li>
           </ul>
-          <form class="navbar-form navbar-nav" action="search.php" method="get">
-            <input type="text" name="fullname" class="form-control" placeholder="Search...">
+          <form class="navbar-form navbar-nav" action="information.php" method="get">
+            <input type="text" name="fullname" class="form-control" placeholder="Buscar usuários">
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
+            <?php  
+               echo 'Seja bem-vindo, '.$email;
+            ?>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+
           </ul>
         </div>
       </div>
     </nav>
-       
-       
 
       </div>
     </div>
@@ -89,6 +92,7 @@ if((!isset ($_SESSION['user']) == true) and (!isset ($_SESSION['password']) == t
       height: 100%;
      
   }
+  
   </style>
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -97,15 +101,14 @@ if((!isset ($_SESSION['user']) == true) and (!isset ($_SESSION['password']) == t
       </ol>
       <div id="slideshow" class="carousel-inner" role="listbox" action="exibe.php">
         <div class="item active" align="center" >
-          <img class="first-slide" src="exibe.php?id=9" alt="Your generated image"  height="768" width="1024" alt="First slide">
+          <img class="first-slide" src="../eventShare/upload/iron_maiden.jpg" alt="Your generated image"  height="768" width="1024" alt="First slide">
           <div class="container">
             <div class="carousel-caption">
-            <p><a class="btn btn-lg btn-primary" href="eventos.html" role="button">Ver mais</a></p>
             </div>
           </div>
         </div>
         <div class="item">
-          <img class="second-slide" src="../eventShare/img/trooper.jpg"  height="768" width="1024" alt="Second slide">
+          <img class="second-slide" src="../eventShare/upload/guns.jpg"  height="768" width="1024" alt="Second slide">
           <div class="container">
             <div class="carousel-caption">
             </div>

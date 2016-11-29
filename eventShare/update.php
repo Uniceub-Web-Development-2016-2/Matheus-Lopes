@@ -1,3 +1,8 @@
+<?php 
+include('requests.php');
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,39 +37,53 @@
   </head>
 
   <body>
-
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../eventShare/perfil.php">Event Share</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="dispatch.php">Uploads</a></li>
+            <li><a href="eventos.php">Events by Category</a></li>
+            <li><a href="update.php">Update User</a></li>
+            <li><a href="updateEvent.php">Search events</a></li>
+          </ul>
+          <form class="navbar-form navbar-nav">
+            <input type="text" class="form-control" placeholder="Search...">
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="signup.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+<form class="form-signup" action="updateUser.php" method="post">
 <div class="container">
   <div class="col-md-4">
   </div>
     <div class="row">
     <div class="col-md-4">
-
-      <form class="form-signup" action="register.php" method="post">
-
-        <h2 class="form-signup-heading">Sign up</h2>
-        <label for="inputName" class="sr-only">Name</label>
-        <input id="fullname" name="fullname" class="form-control" placeholder="Name" required="" autofocus="" type="text">
+       <?php
+         update();
+         ?>
           <br>
-        <label for="inputGender" class="sr-only">Gender</label>
-        <input id="gender" name="gender" class="form-control" placeholder="Gender" required="" autofocus="" type="text">
-          <br>
-        <label for="inputAge" class="sr-only">Age</label>
-        <input id="age" name="age" class="form-control" placeholder="Age" required="" autofocus="" type="text">
-          <br>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input id="email" name="email" class="form-control" placeholder="Email address" required="" autofocus="" type="text">
-          <br>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input id="password" name="password" class="form-control" placeholder="Password" required="" type="text">
-          <br>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
       </form> 
       </div>
       </div>
-
     </div>
-
-
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>

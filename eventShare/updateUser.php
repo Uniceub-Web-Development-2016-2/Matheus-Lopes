@@ -1,7 +1,6 @@
 <?php
 include('httpful.phar');
 
-$id = $_GET['id'];
 
 
 
@@ -12,11 +11,11 @@ $response = \Httpful\Request::put($uri)->sendsJson()->body(json_encode($_POST))-
 if(!empty($response->body)){
 	echo '<script>
 		alert("Usuário atualizado com sucesso!");
-		window.location.href = "requests.php";
+		window.location.href = "update.php";
 	    		</script>';
 }else{
 	echo '<script>
 		alert("Usuário atualizado com sucesso!");
-		window.location.href = "../eventShare/requests.php";
+		window.location.href = "../eventShare/update.php";
 	    		</script>';
 }
