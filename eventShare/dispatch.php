@@ -49,7 +49,7 @@
                 <li><a href="dispatch.php">Upload events</a></li>
                <li><a href="eventos.php">Events by Category</a></li>
                 <li><a href="update.php">Update User</a></li>
-                <li><a href="updateEvent.php">Search events</a></li>
+                <li><a href="searchEvent.php">Search events</a></li>
               </ul>
               <form class="navbar-form navbar-nav" action="information.php" method="get">
               <input type="text" name="fullname" class="form-control" placeholder="Buscar usuários">

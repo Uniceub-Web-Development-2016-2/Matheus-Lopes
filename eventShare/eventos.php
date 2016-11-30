@@ -56,10 +56,10 @@ $LOG = $_SESSION['fullname'];
                 <li><a href="dispatch.php">Upload events</a></li>
                 <li><a href="eventos.php">Events</a></li>
                 <li><a href="update.php">Update user</a></li>
-                <li><a href="updateEvent.php">Search events</a></li>
+                <li><a href="searchEvent.php">Search events</a></li>
               </ul>
               <form class="navbar-form navbar-nav" action="info_event.php" method="get">
-              <input type="text" name="categoria" class="form-control" placeholder="Categoria (ex: heavymetal)">
+              <input type="text" name="categoria" class="form-control" placeholder="Digite a categoria">
                 <button type="submit" class="btn btn-default">Search</button>
               </form>
               <ul class="nav navbar-nav navbar-right">

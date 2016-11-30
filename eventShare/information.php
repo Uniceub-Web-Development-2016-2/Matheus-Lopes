@@ -54,10 +54,10 @@ $LOG = $_SESSION['fullname'];
                 <li><a href="dispatch.php">Uploads</a></li>
                <li><a href="eventos.php">Events by Category</a></li>
                 <li><a href="update.php">Update User</a></li>
-                <li><a href="updateEvent.php">Search events</a></li>
+                <li><a href="searchEvent.php">Search events</a></li>
               </ul>
               <form class="navbar-form navbar-nav" action="requests.php" method="get">
-                <input type="text" name="fullname" class="form-control" placeholder="Search...">
+                <input type="text" name="fullname" class="form-control" placeholder="Search user">
                 <button type="submit" class="btn btn-default">Submit</button>
               </form>
               <ul class="nav navbar-nav navbar-right">

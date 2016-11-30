@@ -57,7 +57,7 @@ $LOG = $_SESSION['fullname'];
                 <li><a href="updateEvent.php">Search events</a></li>
               </ul>
               <form class="navbar-form navbar-nav" action="requests.php" method="get">
-                <input type="text" name="categoria" class="form-control" placeholder="Categoria (ex: heavymetal)">
+                <input type="text" name="categoria" class="form-control" placeholder="Digite a categoria do evento">
                 <button type="submit" class="btn btn-default">Submit</button>
               </form>
               <ul class="nav navbar-nav navbar-right">

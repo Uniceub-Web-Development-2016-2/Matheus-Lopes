@@ -59,7 +59,7 @@ $LOG = $_SESSION['fullname'];
                 <li><a href="updateEvent.php">Search events</a></li>
               </ul>
               <form class="navbar-form navbar-nav" action="show.php" method="get">
-              <input type="text" name="name" class="form-control" placeholder="Nome (ex: ironmaiden)">
+              <input type="text" name="name" class="form-control" placeholder="Nome do evento">
                 <button type="submit" class="btn btn-default">Buscar</button>
               </form>
               <ul class="nav navbar-nav navbar-right">

@@ -25,8 +25,8 @@ if(isset($_POST['upload'])){
   $name = str_replace("í", "i", $name);
   $name = str_replace("é", "e", $name);
   $name = str_replace("ú", "u", $name);
-  $name = str_replace("' ", "", $name);
-  $name = str_replace(" ", "", $name);
+  $name = str_replace("' ", " ", $name);
+  //$name = str_replace(" ", "", $name);
   $name = str_replace("ç", "c", $name);
 
   $local = str_replace("á", "a", $local);
@@ -65,7 +65,7 @@ if(isset($_POST['upload'])){
   $categoria = str_replace("í", "i", $categoria);
   $categoria = str_replace("é", "e", $categoria);
   $categoria = str_replace("ú", "u", $categoria);
-  $categoria = str_replace(" ", "", $categoria);
+  //$categoria = str_replace(" ", "", $categoria);
   $categoria = str_replace("ç", "c", $categoria);
 
   $horario = str_replace("á", "a", $horario);

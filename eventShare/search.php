@@ -56,10 +56,10 @@ foreach ($array as $key => $value) {
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav navbar-left">
-                <li><a href="../eventShare/upload.html">Uploads</a></li>
-               <li><a href="eventos.html">Events</a></li>
-                <li><a href="requests.php">Update User</a></li>
-                <li><a href="#">Help</a></li>
+                <li><a href="dispatch.php">Upload events</a></li>
+               <li><a href="eventos.php">Events by Category</a></li>
+                <li><a href="update.php">Update User</a></li>
+                <li><a href="searchEvent.php">Search events</a></li>
               </ul>
               <form class="navbar-form navbar-nav">
               <form class="navbar-form navbar-nav" action="search.php" method="get">

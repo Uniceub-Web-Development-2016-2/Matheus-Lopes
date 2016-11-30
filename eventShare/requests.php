@@ -38,14 +38,19 @@ foreach ($array as $key => $value) {
 
 }
 
+
 function info(){
-$uri = 'http://localhost/events/eventos/search?categoria="'.$_GET["categoria"].'"';
 
-$response = \Httpful\Request::get($uri)->send();
 
-$variable = json_decode($response->body, true);
+  $link = mysqli_connect("localhost","root","","database");
+  $categoria = $_GET['categoria'];
 
-foreach ($variable as $key => $value) {
+ $query = mysqli_query($link, "SELECT * FROM eventos WHERE categoria LIKE '%".$categoria."%' ");
+
+//
+//$variable = json_decode($response->body, true);
+$row = $query;
+foreach ($row as $key => $value) {
   echo  "<div class='eventos' >
            <h1> Dados do Evento</h1>
            <br>
@@ -125,13 +130,14 @@ function update_event(){
 }
 
 function exibe(){
-$uri = 'http://localhost/events/eventos/search?name="'.$_GET["name"].'"';
+ $link = mysqli_connect("localhost","root","","database");
+  $name = $_GET['name'];
 
-$response = \Httpful\Request::get($uri)->send();
+ $query = mysqli_query($link, "SELECT * FROM eventos WHERE name LIKE '%".$name."%' ");
 
-$variable = json_decode($response->body, true);
+  $row = $query;
 
-foreach ($variable as $key => $value) {
+foreach ($row as $key => $value) {
   echo  "<div class='eventos' >
            <h1> Dados do Evento</h1>
            <br>
