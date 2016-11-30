@@ -53,7 +53,7 @@ session_start();
             <li><a href="dispatch.php">Uploads</a></li>
             <li><a href="eventos.php">Events by Category</a></li>
             <li><a href="update.php">Update User</a></li>
-            <li><a href="updateEvent.php">Search events</a></li>
+            <li><a href="searchEvent.php">Search events</a></li>
           </ul>
           <form class="navbar-form navbar-nav">
             <input type="text" class="form-control" placeholder="Search...">
